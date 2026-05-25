@@ -1,0 +1,25 @@
+{
+  "name": "js-prep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scopeChain.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon ./scopeChain.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amankumar-02/js-prep.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Amankumar-02/js-prep/issues"
+  },
+  "homepage": "https://github.com/Amankumar-02/js-prep#readme",
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
