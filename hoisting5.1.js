@@ -30,5 +30,5 @@ var two = ()=>{
 // There are mainly four cases:
 // 1. undefined
 // 2. ReferenceError: variable is not defined
+// 4. TypeError: one.. is not a function
 // 3. ReferenceError: cannot access before initialization
-// 4. TypeError: ... is not a function
