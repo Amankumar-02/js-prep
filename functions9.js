@@ -204,3 +204,23 @@ const fetchData = async () => {
 fetchData();
 console.log("end")
 
+
+
+// var i = 0;
+for(var i=0; i <3; i++){
+    setTimeout(()=>{
+        console.log(i);
+    }, 100)
+}
+for(let i=0; i <3; i++){
+    setTimeout(()=>{
+        console.log(i);
+    }, 100)
+}
+// for(let i=0; i <3; i++){
+//     console.log(i);
+// }
+// console.log(i)
+var aa = 5;
+var aa = 55;
+console.log(aa)

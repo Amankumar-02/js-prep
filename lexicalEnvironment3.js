@@ -7,6 +7,8 @@
 // local variables
 // function declarations
 // reference to outer environment
+// lexical environment is the local memory along with the lexical environment of its parent local memory
+
 
 let a = 10;
 
@@ -14,7 +16,7 @@ function one() {
    let b = 20;
 
    function two() {
-      let c = 30;
+      let c = 30; 
       console.log(a, b, c);
    }
 
