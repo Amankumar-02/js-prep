@@ -20,7 +20,7 @@ counter(); // Counter: 5
 
 // Uses of Closures:
 
-// Module Design Pattern
+// Module Design Pattern // hiding or capsuling variable
 function counter2() {
     let count = 0;
 
@@ -38,10 +38,31 @@ function counter2() {
 }
 
 const c = counter2();
-
 c.increment();
 c.increment();
 c.decrement();
+const d = counter2();
+d.increment();
+d.increment();
+d.decrement();
+
+// constructor function
+function Counter3(){
+  var count11 = 0;
+  this.increment = function(){
+    count11++;
+    console.log(count11);
+  }
+  this.decrement = function(){
+    count11--;
+    console.log(count11);
+  }
+}
+var counter11 = new Counter3();
+counter11.increment();
+counter11.increment();
+counter11.decrement();
+
 
 // Currying
 function multiply(a) {
@@ -159,6 +180,4 @@ console.log(next());
 console.log(next());
 console.log(next());
 console.log(next());
-
-
 
