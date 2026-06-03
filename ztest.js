@@ -1,29 +1,24 @@
-function topologicalSort(n, adj){
-    let visited = new Array(n).fill(false);
-    let result = [];
-    function dfs(node){
-        visited[node] = true;
-        for(let neighbor of adj[node]){
-            if(!visited[neighbor]){
-                dfs(neighbor);
-            }
-        }
-        result.push(node);
+function groupBy(arr, key) {
+    const result = {};
 
-    }
-    for(let i = 0; i < n; i++){
-        if(!visited[i]){
-            dfs(i);
+    for (const item of arr) {
+        const groupKey = item[key];
+        console.log(!result[groupKey]);
+
+        if (!result[groupKey]) {
+            result[groupKey] = [];
         }
+        console.log(result)
+        result[groupKey].push(item);
     }
-    return result.reverse();
+
+    return result;
 }
 
-const n = 4;
-const adj = [
-    [1, 2],
-    [3],
-    [3],
-    []
-];
-console.log(topologicalSort(n, adj));
+let x = groupBy([
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 30 },
+    { name: 'Charlie', age: 25 }
+],'age');
+
+console.log(x)
