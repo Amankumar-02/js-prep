@@ -1,220 +1,70 @@
-// inheritance-examples.js
+// prototypes-example.js
 
-console.log("=== JavaScript Inheritance Examples ===\n");
-
-/* ==========================================================
-   1. Prototype-Based Inheritance (Constructor Functions)
-   ========================================================== */
-
-function Animal(name) {
+// Constructor function
+function Person(name, age) {
     this.name = name;
+    this.age = age;
 }
 
-Animal.prototype.speak = function () {
-    console.log(`${this.name} makes a sound.`);
+// Method added to the prototype
+Person.prototype.greet = function () {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
 };
 
-function Dog(name, breed) {
-    Animal.call(this, name);
-    this.breed = breed;
-}
-
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-
-Dog.prototype.bark = function () {
-    console.log(`${this.name} barks!`);
+// Another prototype method
+Person.prototype.haveBirthday = function () {
+    this.age++;
+    console.log(`${this.name} is now ${this.age} years old.`);
 };
 
-const dog = new Dog("Buddy", "Labrador");
+// Create instances
+const alice = new Person("Alice", 25);
+const bob = new Person("Bob", 30);
 
-console.log("1. Prototype Inheritance");
-dog.speak();
-dog.bark();
-console.log(dog instanceof Dog);
-console.log(dog instanceof Animal);
-console.log("\n");
+alice.greet();
+bob.greet();
 
-/* ==========================================================
-   2. ES6 Class Inheritance
-   ========================================================== */
+alice.haveBirthday();
 
-class Vehicle {
-    constructor(brand) {
-        this.brand = brand;
-    }
+// Check prototype relationships
+console.log(alice.__proto__ === Person.prototype); // true
+console.log(Person.prototype.constructor === Person); // true
 
-    start() {
-        console.log(`${this.brand} vehicle started.`);
-    }
+// ------------------------------------
+// Prototype Inheritance Example
+// ------------------------------------
+
+function Student(name, age, course) {
+    Person.call(this, name, age); // Call parent constructor
+    this.course = course;
 }
 
-class Car extends Vehicle {
-    constructor(brand, model) {
-        super(brand);
-        this.model = model;
-    }
+// Inherit from Person
+Student.prototype = Object.create(Person.prototype);
 
-    drive() {
-        console.log(`${this.brand} ${this.model} is driving.`);
-    }
-}
+// Restore constructor reference
+Student.prototype.constructor = Student;
 
-const car = new Car("Toyota", "Corolla");
-
-console.log("2. ES6 Class Inheritance");
-car.start();
-car.drive();
-console.log("\n");
-
-/* ==========================================================
-   3. Method Overriding
-   ========================================================== */
-
-class Employee {
-    work() {
-        console.log("Employee is working.");
-    }
-}
-
-class Developer extends Employee {
-    work() {
-        console.log("Developer is writing code.");
-    }
-}
-
-const dev = new Developer();
-
-console.log("3. Method Overriding");
-dev.work();
-console.log("\n");
-
-/* ==========================================================
-   4. Using super in Overridden Methods
-   ========================================================== */
-
-class Person {
-    introduce() {
-        console.log("Hello, I am a person.");
-    }
-}
-
-class Teacher extends Person {
-    introduce() {
-        super.introduce();
-        console.log("I teach JavaScript.");
-    }
-}
-
-const teacher = new Teacher();
-
-console.log("4. Using super");
-teacher.introduce();
-console.log("\n");
-
-/* ==========================================================
-   5. Object.create() Inheritance
-   ========================================================== */
-
-const animalPrototype = {
-    eat() {
-        console.log(`${this.name} is eating.`);
-    }
+// Add Student-specific method
+Student.prototype.study = function () {
+    console.log(`${this.name} is studying ${this.course}.`);
 };
 
-const cat = Object.create(animalPrototype);
-cat.name = "Whiskers";
+const charlie = new Student("Charlie", 20, "JavaScript");
 
-console.log("5. Object.create Inheritance");
-cat.eat();
-console.log("\n");
+charlie.greet(); // inherited from Person.prototype
+charlie.study();
 
-/* ==========================================================
-   6. Multi-Level Inheritance
-   ========================================================== */
+console.log(charlie instanceof Student); // true
+console.log(charlie instanceof Person);  // true
 
-class LivingThing {
-    breathe() {
-        console.log("Breathing...");
-    }
-}
+// ------------------------------------
+// Prototype Chain Inspection
+// ------------------------------------
 
-class Mammal extends LivingThing {
-    walk() {
-        console.log("Walking...");
-    }
-}
-
-class Human extends Mammal {
-    think() {
-        console.log("Thinking...");
-    }
-}
-
-const human = new Human();
-
-console.log("6. Multi-Level Inheritance");
-human.breathe();
-human.walk();
-human.think();
-console.log("\n");
-
-/* ==========================================================
-   7. Mixins (Alternative to Multiple Inheritance)
-   ========================================================== */
-
-const CanFly = {
-    fly() {
-        console.log(`${this.name} is flying.`);
-    }
-};
-
-const CanSwim = {
-    swim() {
-        console.log(`${this.name} is swimming.`);
-    }
-};
-
-class Duck {
-    constructor(name) {
-        this.name = name;
-    }
-}
-
-Object.assign(Duck.prototype, CanFly, CanSwim);
-
-const duck = new Duck("Donald");
-
-console.log("7. Mixins");
-duck.fly();
-duck.swim();
-console.log("\n");
-
-/* ==========================================================
-   8. Static Method Inheritance
-   ========================================================== */
-
-class Shape {
-    static description() {
-        console.log("This is a shape.");
-    }
-}
-
-class Circle extends Shape {}
-
-console.log("8. Static Method Inheritance");
-Circle.description();
-console.log("\n");
-
-/* ==========================================================
-   9. Checking Prototype Chains
-   ========================================================== */
-
-console.log("9. Prototype Chain Checks");
-
-console.log(Object.getPrototypeOf(car) === Car.prototype);
-console.log(Object.getPrototypeOf(Car.prototype) === Vehicle.prototype);
-console.log(car instanceof Car);
-console.log(car instanceof Vehicle);
-
-console.log("\n=== End of Examples ===");
+console.log("Student prototype:", Student.prototype);
+console.log("Person prototype:", Person.prototype);
+console.log(
+    "Prototype chain works:",
+    Object.getPrototypeOf(charlie) === Student.prototype
+);
