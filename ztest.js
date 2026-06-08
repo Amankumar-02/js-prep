@@ -68,3 +68,28 @@ console.log(
     "Prototype chain works:",
     Object.getPrototypeOf(charlie) === Student.prototype
 );
+
+
+// class
+class Person2 {
+    constructor(name) {
+        this.name = name;
+        this.say = function(){
+            console.log("Say Hello " + this.greet() + " " + this.name)
+            return this;
+        }
+    }
+    greet() {
+        // console.log(`Hi, I'm ${this.name}`);
+        return `Hi, I'm ${this.name}`;
+    }
+}
+var user10 = new Person2("Amir from class");
+console.log(user10.name);
+console.log(user10.greet())
+// user10.say().greet()
+user10.say()
+// user10.say().greet()
+console.log("break")
+console.log(user10.say().greet())
+// console.log(user10.say().name)
