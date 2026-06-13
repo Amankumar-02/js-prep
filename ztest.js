@@ -93,3 +93,29 @@ user10.say()
 console.log("break")
 console.log(user10.say().greet())
 // console.log(user10.say().name)
+
+function factorial(n) {
+  // Input validation
+  if (
+    typeof n !== "number" ||
+    Number.isNaN(n) ||
+    !Number.isInteger(n) ||
+    n < 0
+  ) {
+    return false;
+  }
+
+  let result = 1;
+
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+
+  return result;
+}
+
+console.log(factorial(5));      // 120
+console.log(factorial(2.5));    // false
+console.log(factorial(-1));     // false
+console.log(factorial("5"));    // false
+console.log(factorial(null));   // false
